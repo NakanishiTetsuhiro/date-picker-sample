@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+</head>
+<body>
+<section>
+  <label for="datetimepicker">日時</label>
+  <input id="datetimepicker" type="text" >
+</section>
+
+<section>
+  <label for="datepicker">日にちのみ</label>
+  <input id="datepicker" type="text" >
+</section>
+
+<section>
+  <label for="term">期間</label>
+  <input id="date_timepicker_start" type="text">から
+  <input id="date_timepicker_end" type="text">まで
+</section>
+</body>
+<link rel="stylesheet" type="text/css" href="./node_modules/jquery-datetimepicker/jquery.datetimepicker.css"/ >
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script src="./node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<script>
+  jQuery.datetimepicker.setLocale('ja');
+
+  jQuery('#datetimepicker').datetimepicker();
+
+  jQuery('#datepicker').datetimepicker({
+    format:'Y/m/d',
+    timepicker:false
+  });
+
+  jQuery('#date_timepicker_start').datetimepicker({
+    format:'Y/m/d',
+    onShow:function( ct ){
+      this.setOptions({
+        maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false
+      })
+    },
+    timepicker:false
+  });
+
+  jQuery('#date_timepicker_end').datetimepicker({
+    format:'Y/m/d',
+    onShow:function( ct ){
+        this.setOptions({
+        minDate:jQuery('#date_timepicker_start').val()?jQuery('#date_timepicker_start').val():false
+      })
+    },
+    timepicker:false
+  });
+</script>
+</html>
